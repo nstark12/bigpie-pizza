@@ -8,19 +8,26 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [creatingUser, setCreatingUser] = useState(false);
   const [userCreated, setUserCreated] = useState(false);
+  const [error, setError] = useState(false);
 
   async function handleFormSubmit(e) {
     e.preventDefault();
     setCreatingUser(true);
-    await fetch("/api/register", {
+    setError(false);
+    // setUserCreated(true);
+    const response = await fetch("/api/register", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: {
         "Content-Type": "application/json",
       },
     });
+    if (response.ok) {
+      setUserCreated(true);
+    } else {
+      setError(true);
+    }
     setCreatingUser(false);
-    setUserCreated(true);
   }
 
   return (
@@ -33,6 +40,12 @@ export default function RegisterPage() {
           <Link className="underline text-primary" href={"/login"}>
             Login!
           </Link>
+        </div>
+      )}
+      {error && (
+        <div className="my-4 text-center">
+          An error has occurred. <br />
+          Please try again later.
         </div>
       )}
       <form onSubmit={handleFormSubmit} className="block max-w-xs mx-auto">
@@ -65,6 +78,12 @@ export default function RegisterPage() {
           />
           Login with Google
         </button>
+        <div className="text-center my-4 text-gray-500 border-t pt-4">
+          Already have an account?{" "}
+          <Link className="underline text-primary" href={"/login"}>
+            Login here &raquo;
+          </Link>
+        </div>
       </form>
     </section>
   );
