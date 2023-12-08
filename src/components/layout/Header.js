@@ -5,9 +5,9 @@ import Link from "next/link";
 
 export default function Header() {
   const session = useSession();
-  const userData = session.data.user;
-  let userName = userData?.name || userData.email;
-  const status = session.status;
+  const userData = session.data?.user;
+  let userName = userData?.name || userData?.email;
+  const status = session?.status;
 
   if (userName && userName.includes(" ")) {
     userName = userName.split(" ")[0];
