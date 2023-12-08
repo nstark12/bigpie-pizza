@@ -3,6 +3,8 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import InfoBox from "../../components/layout/InfoBox";
+import SuccessBox from "../../components/layout/SuccesBox";
 
 export default function ProfilePage() {
   const session = useSession();
@@ -65,21 +67,9 @@ export default function ProfilePage() {
     <section className="mt-8">
       <h1 className="text-center text-primary text-4xl">Profile</h1>
       <div className="max-w-md mx-auto">
-        {saved && (
-          <h2 className="text-center bg-green-100 px-4 py-2 rounded-md my-2 border border-green-300">
-            Profile saved!
-          </h2>
-        )}
-        {isSaving && (
-          <h2 className="text-center bg-blue-100 px-4 py-2 rounded-md my-2 border border-blue-300">
-            Saving...
-          </h2>
-        )}
-        {isUploading && (
-          <h2 className="text-center bg-blue-100 px-4 py-2 rounded-md my-2 border border-blue-300">
-            Uploading...
-          </h2>
-        )}
+        {saved && <SuccessBox>Profile saved!</SuccessBox>}
+        {isSaving && <InfoBox>Saving...</InfoBox>}
+        {isUploading && <InfoBox>Uploading...</InfoBox>}
         <div className="flex gap-4 items-center">
           <div>
             <div className="p-2 rounded-full relative max-w-[120px]">
