@@ -10,14 +10,14 @@ section.hero {
 input[type="email"],
 input[type="password"],
 input[type="text"] {
-  @apply block w-full my-6 rounded-xl;
+  @apply block w-full my-3 rounded-xl;
   @apply border p-2 border-gray-300 bg-gray-100;
 }
 
 input[type="email"]:disabled,
 input[type="password"]:disabled,
 input[type="text"]:disabled {
-  @apply bg-gray-300;
+  @apply bg-gray-300 cursor-not-allowed text-gray-500;
 }
 
 button {
