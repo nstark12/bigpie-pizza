@@ -10,6 +10,7 @@ export default function ProfilePage() {
   const [image, setImage] = useState("");
   const [saved, setSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const { status } = session;
 
   useEffect(() => {
@@ -41,12 +42,14 @@ export default function ProfilePage() {
     if (files?.length === 1) {
       const data = new FormData();
       data.set("file", files[0]);
+      setIsUploading(true);
       const response = await fetch("/api/upload", {
         method: "POST",
         body: data,
       });
       const link = await response.json();
       setImage(link);
+      setIsUploading(false);
     }
   }
 
@@ -70,6 +73,11 @@ export default function ProfilePage() {
         {isSaving && (
           <h2 className="text-center bg-blue-100 px-4 py-2 rounded-md my-2 border border-blue-300">
             Saving...
+          </h2>
+        )}
+        {isUploading && (
+          <h2 className="text-center bg-blue-100 px-4 py-2 rounded-md my-2 border border-blue-300">
+            Uploading...
           </h2>
         )}
         <div className="flex gap-4 items-center">
