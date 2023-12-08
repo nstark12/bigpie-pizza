@@ -5,7 +5,14 @@ import Link from "next/link";
 
 export default function Header() {
   const session = useSession();
+  const userData = session.data.user;
+  let userName = userData?.name || userData.email;
   const status = session.status;
+
+  if (userName && userName.includes(" ")) {
+    userName = userName.split(" ")[0];
+  }
+
   return (
     <>
       <header className="flex items-center justify-between">
@@ -20,13 +27,18 @@ export default function Header() {
         </nav>
         <nav className="flex items-center gap-4 text-gray-500 font-semibold">
           {status === "authenticated" && (
-            <button
-              className="bg-primary text-white px-8 py-2 rounded-full"
-              href={"/register"}
-              onClick={() => signOut()}
-            >
-              Logout
-            </button>
+            <>
+              <Link className="whitespace-nowrap" href={"/profile"}>
+                Hello, {userName}
+              </Link>
+              <button
+                className="bg-primary text-white px-8 py-2 rounded-full"
+                href={"/register"}
+                onClick={() => signOut()}
+              >
+                Logout
+              </button>
+            </>
           )}
           {status === "unauthenticated" && (
             <>
