@@ -8,7 +8,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "bigpie-pizza.s3.amazonaws.com",
+        hostname: "bigpie-pizza-2.s3.amazonaws.com",
       },
     ],
   },

@@ -8,7 +8,7 @@ export async function POST(req) {
     const file = data.get("file");
     // initiate s3 client
     const s3Client = new S3Client({
-      region: "us-east-2",
+      region: "us-east-1",
       credentials: {
         accessKeyId: process.env.AWS_ACCESS_KEY,
         secretAccessKey: process.env.AWS_SECRET_KEY,
@@ -24,7 +24,7 @@ export async function POST(req) {
     }
 
     const buffer = Buffer.concat(chunks);
-    const bucket = "bigpie-pizza";
+    const bucket = "bigpie-pizza-2";
 
     await s3Client.send(
       new PutObjectCommand({
