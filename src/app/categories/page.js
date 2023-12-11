@@ -91,7 +91,7 @@ export default function CategoriesPage() {
         {categories?.length > 0 &&
           categories.map((category) => (
             <button
-              className="bg-gray-200 rounded-lg p-2 px-4 flex gap-1 mb-1"
+              className="rounded-lg p-2 px-4 flex gap-1 mb-1"
               key={category.id}
               onClick={() => {
                 setEditedCategory(category);
