@@ -9,12 +9,26 @@ export default function ProfilePage() {
   const session = useSession();
   const [userName, setUserName] = useState("");
   const [image, setImage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const { status } = session;
 
   useEffect(() => {
     if (status === "authenticated") {
       setUserName(session.data.user.name);
       setImage(session.data.user.image);
+      fetch("/api/profile").then((response) => {
+        response.json().then((data) => {
+          setPhone(data.phone);
+          setStreetAddress(data.streetAddress);
+          setPostalCode(data.postalCode);
+          setCity(data.city);
+          setCountry(data.country);
+        });
+      });
     }
   }, [session, status]);
 
@@ -23,7 +37,15 @@ export default function ProfilePage() {
     const savingPromise = new Promise(async (resolve, reject) => {
       const response = await fetch("/api/profile", {
         method: "PUT",
-        body: JSON.stringify({ name: userName, image }),
+        body: JSON.stringify({
+          name: userName,
+          image,
+          streetAddress,
+          phone,
+          postalCode,
+          city,
+          country,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -73,9 +95,9 @@ export default function ProfilePage() {
 
   return (
     <section className="mt-8">
-      <h1 className="text-center text-primary text-4xl">Profile</h1>
+      <h1 className="text-center text-primary text-4xl mb-4">Profile</h1>
       <div className="max-w-md mx-auto">
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4">
           <div>
             <div className="p-2 rounded-full relative max-w-[120px]">
               {image && (
@@ -100,13 +122,61 @@ export default function ProfilePage() {
             </label>
           </div>
           <form className="grow" onSubmit={handleProfileInfoUpdate}>
+            <label>First and last name</label>
             <input
               type="text"
               placeholder="First and last name"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />
-            <input type="email" value={session.data.user.email} disabled />
+            <label>Email</label>
+            <input
+              type="email"
+              value={session.data.user.email}
+              placeholder="Email"
+              disabled
+            />
+            <label>Phone</label>
+            <input
+              type="tel"
+              placeholder="Phone number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+            <label>Street address</label>
+            <input
+              type="text"
+              placeholder="Street address"
+              value={streetAddress}
+              onChange={(e) => setStreetAddress(e.target.value)}
+            />
+            <div className="flex gap-2">
+              <div>
+                <label>Postal code</label>
+                <input
+                  type="text"
+                  placeholder="Postal code"
+                  value={postalCode}
+                  onChange={(e) => setPostalCode(e.target.value)}
+                />
+              </div>
+              <div>
+                <label>City</label>
+                <input
+                  type="text"
+                  placeholder="City"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </div>
+            </div>
+            <label>Country</label>
+            <input
+              type="text"
+              placeholder="Country"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            />
             <button type="submit">Save</button>
           </form>
         </div>
