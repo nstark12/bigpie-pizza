@@ -1,6 +1,6 @@
 import EditableImage from "./EditableImage";
 import MenuItemPriceProps from "@/components/layout/MenuItemPriceProps";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MenuItemForm({ onSubmit, menuItem }) {
   const [image, setImage] = useState(menuItem?.image || "");
@@ -9,9 +9,19 @@ export default function MenuItemForm({ onSubmit, menuItem }) {
   const [basePrice, setBasePrice] = useState(menuItem?.basePrice || "");
 
   const [sizes, setSizes] = useState(menuItem?.sizes || []);
+  const [category, setCategory] = useState(menuItem?.category || []);
+  const [categories, setCategories] = useState([]);
   const [extraIngredientPrices, setExtraIngredientPrices] = useState(
     menuItem?.extraIngredientPrices || []
   );
+
+  useEffect(() => {
+    fetch("/api/categories").then((response) => {
+      response.json().then((categories) => {
+        setCategories(categories);
+      });
+    });
+  }, []);
 
   return (
     <form
@@ -23,9 +33,10 @@ export default function MenuItemForm({ onSubmit, menuItem }) {
           basePrice,
           sizes,
           extraIngredientPrices,
+          category,
         })
       }
-      className="mt-8 max-w-md mx-auto"
+      className="mt-8 max-w-2xl mx-auto"
     >
       <div
         className="grid gap-4 items-start"
@@ -47,6 +58,18 @@ export default function MenuItemForm({ onSubmit, menuItem }) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
+          <label>Category</label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            {categories?.length > 0 &&
+              categories.map((category) => (
+                <option value={category._id} key={category._id}>
+                  {category.name}
+                </option>
+              ))}
+          </select>
           <label>Base Price</label>
           <input
             type="text"

@@ -86,7 +86,7 @@ export default function EditMenuItemPage() {
   return (
     <section className="mt-8">
       <UserTabs isAdmin={true} />
-      <div className="max-w-md mx-auto mt-8">
+      <div className="max-w-2xl mx-auto mt-8">
         <Link className="button" href={"/menu-items"}>
           <Left />
           <span>Show all menu items</span>

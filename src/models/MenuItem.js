@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
 const ExtraPriceSchema = new Schema({
   name: String,
@@ -15,6 +15,9 @@ const MenuItemSchema = new Schema(
     },
     description: {
       type: String,
+    },
+    category: {
+      type: mongoose.Types.ObjectId,
     },
     basePrice: {
       type: Number,
