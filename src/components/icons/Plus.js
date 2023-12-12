@@ -1,4 +1,4 @@
-export default function Left({ className = "w-6 h-6" }) {
+export default function Plus({ className = "w-6 h-6" }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@ export default function Left({ className = "w-6 h-6" }) {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
       />
     </svg>
   );
