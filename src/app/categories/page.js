@@ -1,5 +1,6 @@
 "use client";
 import UserTabs from "@/components/layout/UserTabs";
+import DeleteButton from "@/components/DeleteButton";
 import { useEffect, useState } from "react";
 import { useProfile } from "@/components/UseProfile";
 import toast from "react-hot-toast";
@@ -100,10 +101,21 @@ export default function CategoriesPage() {
               onChange={(e) => setCategoryName(e.target.value)}
             />
           </div>
-          <div className="pb-3">
+          <div className="pb-3 flex gap-1">
             <button className="border border-primary" type="submit">
               {editedCategory ? "Update" : "Create"}
             </button>
+            {editedCategory && (
+              <button
+                type="button"
+                onClick={() => {
+                  setEditedCategory(null);
+                  setCategoryName("");
+                }}
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </div>
       </form>
@@ -126,12 +138,10 @@ export default function CategoriesPage() {
                 >
                   Edit
                 </button>
-                <button
-                  onClick={() => handleCategoryDelete(category._id)}
-                  type="button"
-                >
-                  Delete
-                </button>
+                <DeleteButton
+                  label={"Delete"}
+                  onDelete={() => handleCategoryDelete(category._id)}
+                />
               </div>
             </div>
           ))}
