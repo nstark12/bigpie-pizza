@@ -51,6 +51,27 @@ export default function CategoriesPage() {
     });
   }
 
+  async function handleCategoryDelete(_id) {
+    const promise = new Promise(async (resolve, reject) => {
+      const response = await fetch("/api/categories?_id=" + _id, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
+
+    await toast.promise(promise, {
+      loading: "Deleting...",
+      success: "Deleted",
+      error: "Error Deleting",
+    });
+
+    fetchCategories();
+  }
+
   if (profileLoading) {
     return "Loading user information...";
   }
@@ -87,19 +108,32 @@ export default function CategoriesPage() {
         </div>
       </form>
       <div>
-        <h2 className="mt-8 text-sm text-gray-500">Edit Category: </h2>
+        <h2 className="mt-8 text-sm text-gray-500">Existing Categories: </h2>
         {categories?.length > 0 &&
           categories.map((category) => (
-            <button
-              className="rounded-lg p-2 px-4 flex gap-1 mb-1"
+            <div
+              className="rounded-lg p-2 px-4 flex gap-1 mb-1 bg-gray-100 items-center"
               key={category.id}
-              onClick={() => {
-                setEditedCategory(category);
-                setCategoryName(category.name);
-              }}
             >
-              <span>{category.name}</span>
-            </button>
+              <div className="grow">{category.name}</div>
+              <div className="flex gap-1">
+                <button
+                  onClick={() => {
+                    setEditedCategory(category);
+                    setCategoryName(category.name);
+                  }}
+                  type="button"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleCategoryDelete(category._id)}
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
           ))}
       </div>
     </section>
