@@ -33,7 +33,7 @@ export default function OrdersPage() {
           orders.map((order) => (
             <div
               key={order.id}
-              className="bg-gray-100 mb-2 p-4 rounded-lg flex items-center gap-4"
+              className="bg-gray-100 mb-2 p-4 rounded-lg sm:flex items-center gap-4"
             >
               <div className="grow flex items-center gap-4">
                 <div>

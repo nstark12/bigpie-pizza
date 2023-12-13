@@ -39,7 +39,7 @@ export default function MenuItemForm({ onSubmit, menuItem }) {
       className="mt-8 max-w-2xl mx-auto"
     >
       <div
-        className="grid gap-8 items-start"
+        className="sm:grid gap-8 items-start"
         style={{ gridTemplateColumns: ".3fr .7fr" }}
       >
         <div>
