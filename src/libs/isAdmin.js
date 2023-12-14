@@ -1,4 +1,5 @@
 import { UserInfo } from "@/models/UserInfo";
+import { authOptions } from "./authOptions";
 
 export async function isAdmin() {
   const session = await getServerSession(authOptions);
