@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Right from "../icons/Right";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -17,14 +18,18 @@ export default function Hero() {
           delicious joy in life
         </p>
         <div className="flex gap-4 text-sm">
-          <button className="bg-primary uppercase items-center flex justify-center gap-2 text-white py-2 rounded-full">
-            Order Now
-            <Right />
-          </button>
-          <button className="flex gap-2 border-0 text-gray-600 items-center font-semibold py-2">
-            Learn More
-            <Right />
-          </button>
+          <Link href={"/menu"}>
+            <button className="bg-primary uppercase items-center flex justify-center gap-2 text-white py-2 rounded-full whitespace-nowrap">
+              Order Now
+              <Right />
+            </button>
+          </Link>
+          <Link href={"/#about"}>
+            <button className="flex gap-2 border-0 text-gray-600 items-center font-semibold py-2">
+              Learn More
+              <Right />
+            </button>
+          </Link>
         </div>
       </div>
       <div className="relative hidden md:block">

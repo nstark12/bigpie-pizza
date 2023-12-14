@@ -25,7 +25,9 @@ export default function MenuPage() {
         categories.map((category) => (
           <div key={category._id}>
             <div className="text-center">
-              <SectionHeaders mainHeader={category.name} />
+              {category.name !== "Salad" && (
+                <SectionHeaders mainHeader={category.name} />
+              )}
             </div>
             <div className="grid sm:grid-cols-3 gap-4 mt-6 mb-12">
               {menuItems
