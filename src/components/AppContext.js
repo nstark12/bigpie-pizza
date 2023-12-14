@@ -28,6 +28,11 @@ export function AppProvider({ children }) {
     }
   }, [ls]);
 
+  function clearCart() {
+    setCartProducts([]);
+    saveCartProductsToLocalStorage([]);
+  }
+
   function removeCartProduct(indexToRemove) {
     setCartProducts((prevCartProducts) => {
       const newCartProducts = prevCartProducts.filter(
@@ -37,11 +42,6 @@ export function AppProvider({ children }) {
       return newCartProducts;
     });
     toast.success("Product removed");
-  }
-
-  function clearCart() {
-    setCartProducts([]);
-    saveCartProductsToLocalStorage([]);
   }
 
   function saveCartProductsToLocalStorage(cartProducts) {

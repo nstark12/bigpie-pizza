@@ -5,6 +5,8 @@ import CartProduct from "@/components/menu/CartProduct";
 import { useContext, useEffect, useState } from "react";
 import AddressInput from "@/components/layout/AddressInput";
 import { useProfile } from "@/components/UseProfile";
+import Trash from "@/components/icons/Trash";
+import Image from "next/image";
 import toast from "react-hot-toast";
 
 export default function CartPage() {
@@ -95,11 +97,52 @@ export default function CartPage() {
           )}
           {cartProducts?.length > 0 &&
             cartProducts.map((product, index) => (
-              <CartProduct
-                key={product._id}
-                product={product}
-                onRemove={removeCartProduct}
-              />
+              <>
+                <div
+                  key={product._id}
+                  className="flex gap-4 mb-2 border-b py-2 items-center"
+                >
+                  <div className="w-24">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      width={240}
+                      height={240}
+                    />
+                  </div>
+                  <div className="grow">
+                    <h3>{product.name}</h3>
+                    {product.size && (
+                      <div className="text-sm text-gray-500 font-semibold">
+                        Size: <span>{product.size.name}</span>
+                      </div>
+                    )}
+                    {product.extras?.length > 0 && (
+                      <div className="mt-2 text-sm">
+                        Add-Ons:
+                        {product.extras.map((extra) => (
+                          <div key={extra.name} className="text-gray-500">
+                            {extra.name} ${extra.price}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-lg font-semibold">
+                    ${cartProductPrice(product)}
+                  </div>
+
+                  <div className="ml-2">
+                    <button
+                      className="p-2"
+                      type="button"
+                      onClick={() => removeCartProduct(index)}
+                    >
+                      <Trash />
+                    </button>
+                  </div>
+                </div>
+              </>
             ))}
           <div className="py-2 pr-16 flex justify-end items-center ">
             <div className="text-gray-500">
