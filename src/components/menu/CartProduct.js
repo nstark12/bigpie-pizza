@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function CartProduct({ product, onRemove }) {
   return (
     <div
-      key={product.id}
+      key={product._id}
       className="flex gap-4 mb-2 border-b py-2 items-center"
     >
       <div className="w-24">
@@ -27,7 +27,7 @@ export default function CartProduct({ product, onRemove }) {
           <div className="mt-2 text-sm">
             Add-Ons:
             {product.extras.map((extra) => (
-              <div key={extra._id} className="text-gray-500">
+              <div key={extra.name} className="text-gray-500">
                 {extra.name} ${extra.price}
               </div>
             ))}
