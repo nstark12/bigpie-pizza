@@ -32,7 +32,7 @@ export default function OrdersPage() {
         {orders?.length > 0 &&
           orders.map((order) => (
             <div
-              key={order.id}
+              key={order._id}
               className="bg-gray-100 mb-2 p-4 rounded-lg sm:flex items-center gap-4"
             >
               <div className="grow flex items-center gap-4">
@@ -52,7 +52,7 @@ export default function OrdersPage() {
                   <div className="text-gray-600 text-xs">
                     {dbTimeForHuman(order.createdAt)}
                   </div>
-                  <div class="text-gray-500">
+                  <div className="text-gray-500">
                     {order.cartProducts
                       .map((product) => product.name)
                       .join(", ")}

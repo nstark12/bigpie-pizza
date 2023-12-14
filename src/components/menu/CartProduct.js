@@ -27,7 +27,7 @@ export default function CartProduct({ product, onRemove }) {
           <div className="mt-2 text-sm">
             Add-Ons:
             {product.extras.map((extra) => (
-              <div key={extra.id} className="text-gray-500">
+              <div key={extra._id} className="text-gray-500">
                 {extra.name} ${extra.price}
               </div>
             ))}

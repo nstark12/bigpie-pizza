@@ -81,12 +81,12 @@ export default function MenuItem(menuItem) {
                     Pick Your Size
                   </h3>
                   {sizes.map((size) => (
-                    <div key={size.id} className="py-2">
+                    <div key={size._id} className="py-2">
                       <label className="p-3 border rounded-md flex items-center gap-2 mb-1">
                         <input
                           type="radio"
                           name={size}
-                          onClick={() => setSelectedSize(size)}
+                          onChange={() => setSelectedSize(size)}
                           checked={selectedSize?.name === size.name}
                         />{" "}
                         {size.name} ${basePrice + size.price}
@@ -101,7 +101,7 @@ export default function MenuItem(menuItem) {
                     Additional Ingredients
                   </h3>
                   {extraIngredientPrices.map((extra) => (
-                    <div key={extra.id} className="py-2">
+                    <div key={extra._id} className="py-2">
                       <label className="p-3 border rounded-md flex items-center gap-2 mb-1">
                         <input
                           type="checkbox"

@@ -31,10 +31,10 @@ export default function UsersPage() {
         {users.length > 0 &&
           users.map((user) => (
             <div
-              className="bg-gray-100 rounded-lg mb-2 p-1 px-4 flex items-center gap-4"
+              className="bg-gray-100 rounded-lg mb-2 p-1 px-4 md:flex items-center gap-4"
               key={user._id}
             >
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 grow">
+              <div className="grid md:grid-cols-3 gap-4 grow">
                 <div className="text-gray-600">
                   {user.name && <span>{user.name}</span>}
                   {!user.name && <span className="italic ">No Name</span>}

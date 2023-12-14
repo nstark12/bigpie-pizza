@@ -125,7 +125,7 @@ export default function CategoriesPage() {
           categories.map((category) => (
             <div
               className="rounded-lg p-2 px-4 flex gap-1 mb-1 bg-gray-100 items-center"
-              key={category.id}
+              key={category._id}
             >
               <div className="grow">{category.name}</div>
               <div className="flex gap-1">

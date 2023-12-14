@@ -96,7 +96,7 @@ export default function CartPage() {
           {cartProducts?.length > 0 &&
             cartProducts.map((product, index) => (
               <CartProduct
-                key={product.id}
+                key={product._id}
                 product={product}
                 onRemove={removeCartProduct}
               />
